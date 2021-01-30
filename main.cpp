@@ -37,10 +37,23 @@ int main()
 { 
   my_SDL_init();
   
+  SDL_Texture* my_texture = NULL;
+  SDL_Surface* temp = IMG_Load(./);
+  
+  my_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
+  SDL_FreeSurface(temp);
+  
+  SDL_Rect rect;
+  rect.x = 0;
+  rect.y = 200;
+  rect.w = 150;
+  rect.h = 40;
+  
 
   while(true){
     
     SDL_RenderClear(my_renderer);
+    SDL_RenderCopy(my_renderer, my_texture, NULL, &rect);
     SDL_RenderPresent(my_renderer);
 
   }
