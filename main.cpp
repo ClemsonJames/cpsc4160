@@ -38,10 +38,9 @@ int main()
   my_SDL_init();
   
   SDL_Texture* my_texture = NULL;
-  SDL_Surface* temp = IMG_Load(./);
+  SDL_Surface* image = IMG_Load("./PlayerIdle1.png");
   
-  my_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
-  SDL_FreeSurface(temp);
+  my_texture = SDL_CreateTextureFromSurface(my_renderer, image);
   
   SDL_Rect rect;
   rect.x = 0;
@@ -53,11 +52,13 @@ int main()
   while(true){
     
     SDL_RenderClear(my_renderer);
-    SDL_RenderCopy(my_renderer, my_texture, NULL, &rect);
+    SDL_RenderCopy(my_renderer, my_texture, NULL, NULL);
     SDL_RenderPresent(my_renderer);
 
   }
 
+  SDL_DestroyTexture(my_texture);
+  SDL_FreeSurface(image);
   SDL_DestroyRenderer(my_renderer);
   SDL_DestroyWindow(my_window);
 
