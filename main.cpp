@@ -40,12 +40,11 @@ int main()
 {
   int start_time = 0;
   int last_start_time = 0;
-  int current_fps = 0;
-  int fps_counter = 0;
   int duration = 0;
   my_SDL_init();
   
   SDL_Texture* my_texture = NULL;
+  SDL_Texture* rocket_texture = NULL;
   SDL_Surface* image = IMG_Load("./site.jpg");
   SDL_Surface* temp = IMG_Load("./rocket.png");
   
@@ -61,10 +60,10 @@ int main()
   rect.h = 75;
 
   SDL_Rect rocket_rect;
-  rocket_rect.x = 320;
-  rocket_rect.y = 100;
-  rocket_rect.w = 100;
-  rocket_rect.h = 200;
+  rocket_rect.x = 300;
+  rocket_rect.y = 400;
+  rocket_rect.w = 200;
+  rocket_rect.h = 300;
   
 
   while(true){
@@ -72,9 +71,9 @@ int main()
 
     SDL_RenderClear(my_renderer);
 
-    rocket_rect.y += 5;
-    if (rocket_rect.y > SCREEN_HEIGHT) {
-      rocket_rect.y = 100;
+    rocket_rect.y -= 3;
+    if (rocket_rect.y > -rocket_rect.h) {
+      rocket_rect.y = 400;
     }
 
     SDL_RenderCopy(my_renderer, my_texture, NULL, NULL);
@@ -86,11 +85,8 @@ int main()
 
     SDL_RenderPresent(my_renderer);
 
-    fps_counter++;
     if (start_time >= (last_start_time + 1000)) {
       last_start_time = start_time;
-      current_fps = fps_counter;
-      fps_counter = 0;
     }
 
     duration = SDL_GetTicks() -  start_time;
