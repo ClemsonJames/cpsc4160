@@ -72,7 +72,7 @@ int main()
     SDL_RenderClear(my_renderer);
 
     rocket_rect.y -= 3;
-    if (rocket_rect.y > -rocket_rect.h) {
+    if (rocket_rect.y < -rocket_rect.h) {
       rocket_rect.y = 400;
     }
 
