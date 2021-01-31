@@ -8,6 +8,9 @@
 #include <SDL2/SDL_timer.h>
 
 //Screen dimension
+const int fps = 60;
+const int frame_duration = 1000 / fps;
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
@@ -34,28 +37,68 @@ void my_SDL_init(){
 }
 
 int main() 
-{ 
+{
+  int start_time = 0;
+  int last_start_time = 0;
+  int current_fps = 0;
+  int fps_counter = 0;
+  int duration = 0;
   my_SDL_init();
   
   SDL_Texture* my_texture = NULL;
   SDL_Surface* image = IMG_Load("./site.jpg");
+  SDL_Surface* temp = IMG_Load("./rocket.png");
   
   my_texture = SDL_CreateTextureFromSurface(my_renderer, image);
+  rocket_texture = SDL_CreateTextureFromSurface(my_renderer, temp);
+
+  SDL_FreeSurface(temp);
   
   SDL_Rect rect;
   rect.x = 0;
   rect.y = 200;
   rect.w = 150;
   rect.h = 75;
+
+  SDL_Rect rocket_rect;
+  rocket_rect.x = 320;
+  rocket_rect.y = 100;
+  rocket_rect.w = 100;
+  rocket_rect.h = 200;
   
 
   while(true){
-    
+    start_time = SDL_GetTicks();
+
     SDL_RenderClear(my_renderer);
+
+    rocket_rect.y += 5;
+    if (rocket_rect.y > SCREEN_HEIGHT) {
+      rocket_rect.y = 100;
+    }
+
     SDL_RenderCopy(my_renderer, my_texture, NULL, NULL);
     SDL_SetRenderDrawColor(my_renderer, 0, 0, 255, 255);
     SDL_RenderFillRect(my_renderer, &rect);
+    SDL_RenderCopy(my_renderer, rocket_texture, NULL, &rocket_rect);
+
+
+
     SDL_RenderPresent(my_renderer);
+
+    fps_counter++;
+    if (start_time >= (last_start_time + 1000)) {
+      last_start_time = start_time;
+      current_fps = fps_counter;
+      fps_counter = 0;
+    }
+
+    duration = SDL_GetTicks() -  start_time;
+
+    if (duration < frame_duration) {
+      SDL_Delay(frame_duration - duration);
+    }
+
 
   }
 
