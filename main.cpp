@@ -38,7 +38,7 @@ int main()
   my_SDL_init();
   
   SDL_Texture* my_texture = NULL;
-  SDL_Surface* image = IMG_Load("./PlayerIdle1.png");
+  SDL_Surface* image = IMG_Load("./site.jpg");
   
   my_texture = SDL_CreateTextureFromSurface(my_renderer, image);
   
@@ -46,13 +46,15 @@ int main()
   rect.x = 0;
   rect.y = 200;
   rect.w = 150;
-  rect.h = 40;
+  rect.h = 75;
   
 
   while(true){
     
     SDL_RenderClear(my_renderer);
     SDL_RenderCopy(my_renderer, my_texture, NULL, NULL);
+    SDL_SetRenderDrawColor(my_renderer, 0, 0, 255, 255);
+    SDL_RenderFillRect(my_renderer, &rect);
     SDL_RenderPresent(my_renderer);
 
   }
