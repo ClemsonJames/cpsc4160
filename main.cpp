@@ -41,6 +41,7 @@ int main()
   int start_time = 0;
   int last_start_time = 0;
   int duration = 0;
+  bool is_running = true;
   my_SDL_init();
   
   SDL_Texture* my_texture = NULL;
@@ -66,12 +67,18 @@ int main()
   rocket_rect.h = 300;
   
 
-  while(true){
+  while(is_running){
     start_time = SDL_GetTicks();
+    
+    while(SDL_PollEvent(&input) > 0) {
+      if (input.type == SDL_QUIT) {
+        is_running = false;
+      }
+    }
 
     SDL_RenderClear(my_renderer);
 
-    rocket_rect.y -= 3;
+    rocket_rect.y -= 5;
     if (rocket_rect.y < -rocket_rect.h) {
       rocket_rect.y = 400;
     }
