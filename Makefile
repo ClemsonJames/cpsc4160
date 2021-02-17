@@ -1,42 +1,28 @@
-# A simple Makefile for SDL projects
+#OBJS specifies which files to compile as part of the project
+OBJS = .\src\main.cpp .\src\GameObject.cpp
 
-# set the compiler
+#CC specifies which compiler we're using
 CC = g++
 
-# set the compiler flags
-CFLAGS = `sdl2-config --libs --cflags` -ggdb3 -O0 -Wall -lSDL2_image -lm 
+#INCLUDE_PATHS specifies the additional include paths we'll need
+INCLUDE_PATHS = -IC:\SDL2\include
 
-# add header files here
-HDRS = 
+#LIBRARY_PATHS specifies the additional library paths we'll need
+LIBRARY_PATHS = -LC:\SDL2\lib
 
-# add source files here
-SRCS = main.cpp
+#COMPILER_FLAGS specifies the additional compilation options we're using
+# -w suppresses all warnings
+# -Wl,-subsystem,windows gets rid of the console window
+COMPILER_FLAGS = -w -Wl,-subsystem,windows
 
-# generate names of object files
-OBJS = $(SRCS:.cpp=.o)
+#LINKER_FLAGS specifies the libraries we're linking against
+LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
-# name of executable
-EXEC = my_game
+#OBJ_NAME specifies the name of our exectuable
+OBJ_NAME = game
 
-# default recipe
-all: $(EXEC)
- 
-#showfont: showfont.c Makefile
-#    $(CC) -o $@ $@.c $(CFLAGS) $(LIBS)
+#This is the target that compiles our executable
+all : $(OBJS)
+	$(CC) $(OBJS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
-#glfont: glfont.c Makefile
-#    $(CC) -o $@ $@.c $(CFLAGS) $(LIBS)
-
-# recipe for building the final executable
-$(EXEC): $(OBJS) $(HDRS) Makefile
-	$(CC) -o $@ $(OBJS) $(CFLAGS)
-
-# recipe for building object files
-$(OBJS): $(@:.o=.cpp) $(HDRS) Makefile
-	$(CC) -o $@ $(@:.o=.cpp) -c $(CFLAGS)
-
-# recipe to clean the workspace
-clean:
-	rm -f $(EXEC) 
-	rm -f $(OBJS)
 
