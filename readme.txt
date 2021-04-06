@@ -3,14 +3,19 @@ To run the problem:
 2. Run make
 3. run ./my_game 
 
-Then the game should be open with a rocket launch site picture, a blue rectangle, and an animation of a rocket.
+Then the game should be open with a pixel character on a platforms
+
+The controls for the game are:
+1) A for moving left
+2) D for moving right
+3) SPACE for jump upward
+4) Press A and SPACE to jump left
+5) Press D and SPACE to jump right
+NOTE: I have changed to all Vel control metaphor for this project.
 
 Requirements for the project are:
-1) Load an image from outside the program, and display it (3pts)
-    The launch site and the rocket is an image from outside the program
 
-2) Use the SDL_Rect class to fill some part of the screen (3pts) - not using an image.
-    The blue rectangle is made from the SDL_Rect class, and no outside image is used
 
-3) Add some form of animation to make it interesting (3pts)
-    The rocket animation should go up and reapear at the bottom of the screen. It should repeat the animation.
+Credit for art:
+https://opengameart.org/content/a-platformer-in-the-forest
+https://ansimuz.itch.io/mountain-dusk-parallax-background

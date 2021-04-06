@@ -1,5 +1,6 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = .\src\main.cpp .\src\GameObject.cpp
+OBJS = .\src\main.cpp .\src\GameEngine.cpp .\src\GameObject.cpp .\src\Player.cpp .\src\Sprite.cpp .\src\Tile.cpp .\src\Background.cpp \
+.\src\TileHandler.cpp
 
 #CC specifies which compiler we're using
 CC = g++
@@ -13,7 +14,7 @@ LIBRARY_PATHS = -LC:\SDL2\lib
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 # -Wl,-subsystem,windows gets rid of the console window
-COMPILER_FLAGS = -w -Wl,-subsystem,windows
+COMPILER_FLAGS = -w
 
 #LINKER_FLAGS specifies the libraries we're linking against
 LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image

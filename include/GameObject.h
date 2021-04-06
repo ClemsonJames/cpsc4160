@@ -4,29 +4,27 @@
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_image.h> 
 #include <SDL2/SDL_timer.h>
+#include "Sprite.h"
+#include <functional>
+#include <memory>
 
 class GameObject {
+    
 	public:
+        SDL_Rect destRect;
+        Sprite* sprite;
+        double velX = 0.0;
+        double velY = 0.0;
 	
 		GameObject(int x, int y, int w, int h) {
-            this->surface = NULL;
-            this->texture = NULL;
-            rect.x = x;
-            rect.y = y;
-            rect.w = w;
-            rect.h = h;
+            destRect.x = x;
+            destRect.y = y;
+            destRect.w = w;
+            destRect.h = h;
         }
 
 		~GameObject() {}
-		
-		void load(char* filename, SDL_Renderer* renderer);
-		void draw(SDL_Renderer* my_renderer);
-		void clean();
-		
-	//private:
-		SDL_Surface* surface;
-        SDL_Texture* texture;
-        SDL_Rect rect;
+
 };
 
 #endif
